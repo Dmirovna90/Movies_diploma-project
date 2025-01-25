@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  height: 10vh;
+  background-color: #000;
+  width: 100vw;
+}
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: auto;
+}
+.headerWrap {
+  width: 1120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+}
+.logotext {
+  font-size: 36px;
+  color: #ff5c00;
+  line-height: 42px;
+}
+.logoSvg {
+  background-color: #ff5c00;
+}
