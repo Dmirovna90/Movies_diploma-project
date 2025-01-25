@@ -1,0 +1,19 @@
+.titleWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: left;
+    width: 1120px;
+    margin: 40px 0;
+  }
+  .titleText {
+    font-size: 36px;
+    color: #fff;
+    line-height: 42px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .titleText:hover{
+    color:#ff5c00;
+    border-bottom: 1px solid #ff5c00;
+  }

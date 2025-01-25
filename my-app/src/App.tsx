@@ -2,17 +2,17 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Pages/Layout/Layout";
 import Home from "./Pages/Home/Home";
-import Movie from "./Pages/Movie/Movie";
+import SelectedMovie from "./Pages/SelectedMovie/SelectedMovie";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />}>
-          Home
+          Главная
         </Route>
-        <Route path="/:id" element={<Movie />}>
-          Movie
+        <Route path="/:kinopoiskId" element={<SelectedMovie />}>
+          Фильмы
         </Route>
       </Route>
     </Routes>

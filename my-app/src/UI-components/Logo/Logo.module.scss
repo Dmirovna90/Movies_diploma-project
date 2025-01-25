@@ -1,0 +1,17 @@
+.logoWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 170px;
+  }
+  .logotext {
+    font-size: 36px;
+    color: #ff5c00;
+    line-height: 42px;
+    font-weight: 700;
+  }
+  .logoSvg {
+    background-color: #ff5c00;
+  }
+  
