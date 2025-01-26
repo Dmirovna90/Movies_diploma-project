@@ -4,6 +4,7 @@ import style from "./SelectedMovie.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { getMovieInfo } from "../../store/selectedMovieSlice";
+import Crumbs from "../../UI-components/Crumbs/Crumbs";
 const SelectedMovie = () => {
   const navigate = useNavigate();
   const { movieInfo, loading, error } = useSelector((state) => state.movie);
@@ -21,15 +22,8 @@ const SelectedMovie = () => {
 
   return (
     <div className={style.container} key={movieInfo.kinopoiskId}>
-      <div className={style.crumbs}>
-        <button className={style.btnHome} onClick={() => navigate("/")}>
-          Главная
-        </button>
-        <button className={style.btnPost} onClick={() => navigate("")}>
-          {movieInfo.nameRu}
-        </button>
-      </div>
-      <div className = {style.wrap}>
+      <Crumbs />
+      <div className={style.wrap}>
         <div className={style.posterWrap}>
           <img className={style.poster} src={movieInfo.posterUrl}></img>
         </div>

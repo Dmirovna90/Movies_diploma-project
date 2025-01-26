@@ -2,14 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async (objectFromMoviesPage, { rejectWithValue }) => {
-    const { type, limit, offset, searchQuery, ordering }: any = objectFromMoviesPage;
+    const { type, page }: any = objectFromMoviesPage;
     try {
       const response = await fetch(
-        `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=${type}&limit=${limit}&offset=${offset}&ordering=${ordering}&search=${searchQuery}`,
+        `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=${type}&page=${page}`,
         {
           method: "GET",
           headers: {
-            "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            //   "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
             "Content-Type": "application/json",
           },
         }
@@ -18,7 +19,7 @@ export const fetchMovies = createAsyncThunk(
         throw new Error("error");
       }
       const data = await response.json();
-      return data.items;
+      return data;
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
@@ -33,19 +34,11 @@ const moviesSlice = createSlice({
     type: "",
     totalItems: 0,
     currentPage: 1,
-    itemsPerPage: 10,
-    searchQuery: "",
     ordering: "",
   },
   reducers: {
-    setType: (state, action) => {
-      state.type = action.payload;
-    },
     setPage: (state, action) => {
       state.currentPage = action.payload;
-    },
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
     },
     setOrdering: (state, action) => {
       state.ordering = action.payload;
@@ -59,7 +52,8 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.movies = action.payload;
+        state.movies = action.payload.items;
+        state.totalItems = action.payload.total;
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         state.loading = false;
@@ -67,5 +61,5 @@ const moviesSlice = createSlice({
       });
   },
 });
-export const { setType, setPage, setOrdering, setSearchQuery } = moviesSlice.actions;
+export const { setPage, setOrdering } = moviesSlice.actions;
 export default moviesSlice.reducer;

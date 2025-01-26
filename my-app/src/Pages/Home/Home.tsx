@@ -1,34 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchMovies, setPage, setType } from "../../store/moviesSlise";
+import { fetchMovies, setPage } from "../../store/moviesSlice";
 import style from "./Home.module.scss";
 import CardMovie from "../../Components/CardMovie/CardMovie";
 import Title from "../../UI-components/Title/Title";
 
 const Home = () => {
   const dispatch = useDispatch<any>();
-  const {
-    movies,
-    loading,
-    error,
-    type,
-    currentPage,
-    itemsPerPage,
-    totalItems,
-    searchQuery,
-    ordering,
-  } = useSelector((state) => state.movies);
+  const { movies, loading, error, type, currentPage, totalItems } =
+    useSelector((state) => state.movies);
   useEffect(() => {
     dispatch(
       fetchMovies({
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
-        searchQuery: searchQuery,
-        ordering: ordering,
-        type: 'TOP_250_TV_SHOWS',
-      })
+        type: "TOP_250_TV_SHOWS",
+        page: currentPage,
+      }),
     );
-  }, [currentPage, ordering, type]);
+  }, [type, currentPage]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -44,7 +33,9 @@ const Home = () => {
   const handlerNext = () => {
     if (currentPage < totalPage) dispatch(setPage(currentPage + 1));
   };
-  const totalPage = Math.ceil(totalItems / itemsPerPage);
+
+  const totalPage = Math.ceil(totalItems / 20);
+  console.log(currentPage)
   const renderPageNumber = () => {
     const pageNumber = [];
     const maxPageNumber = 10;
@@ -53,7 +44,7 @@ const Home = () => {
     for (let i = startPage; i <= endPage; i++) {
       pageNumber.push(
         <button
-          style={{ color: i === currentPage && "#fff" }}
+          style={{ color: i === currentPage && "#ff5c00" }}
           className={style.page}
           key={i}
           onClick={() => handlerPageChange(i)}
@@ -66,13 +57,19 @@ const Home = () => {
   };
 
   return (
-    <div className = {style.container}>
-      <Title title = {'Популярные сериалы >'}/>
-      <div className = {style.cardsWrap}>
+    <div className={style.container}>
+      <Title title={"Популярные сериалы >"} />
+      <div className={style.cardsWrap}>
         {movies.map((item: any) => {
           return (
             <div key={item.kinopoiskId}>
-                <CardMovie kinopoiskId = {item.kinopoiskId} posterUrl= {item.posterUrl} nameRu={item.nameRu}/>
+              <CardMovie
+                kinopoiskId={item.kinopoiskId}
+                posterUrl={item.posterUrl}
+                nameRu={item.nameRu}
+                ratingKinopoisk={item.ratingKinopoisk}
+                year={item.year}
+              />
             </div>
           );
         })}
@@ -100,7 +97,7 @@ const Home = () => {
             <span className={style.next}>Next</span>
           </div>
           <div className={style.arrowNext}>
-          <p>Next</p>
+            <p>Next</p>
           </div>
         </div>
       </div>

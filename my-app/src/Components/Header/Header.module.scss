@@ -31,3 +31,15 @@
 .logoSvg {
   background-color: #ff5c00;
 }
+.wrap{
+  width: 50vw;
+  display: flex;
+align-items: center;
+  justify-content: center;
+}
+.logoBtnWrap{
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}

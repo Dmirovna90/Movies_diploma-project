@@ -1,0 +1,19 @@
+.container {
+    max-width: 1120px;
+    padding: 0 15px;
+    margin: auto;
+}
+.cardsWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 1120px;
+}
+.ordering {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}

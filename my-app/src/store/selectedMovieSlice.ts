@@ -9,7 +9,8 @@ export const getMovieInfo = createAsyncThunk(
         {
           method: "GET",
           headers: {
-            "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            //   "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
             "Content-Type": "application/json",
           },
         }
@@ -39,8 +40,8 @@ const selectedMovieSlice = createSlice({
       description: "",
       countries: [],
       genres: [],
-      country: '',
-      genre: '',
+      country: "",
+      genre: "",
     },
     loading: false,
     error: null as string | null,

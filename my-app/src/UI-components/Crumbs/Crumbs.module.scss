@@ -1,0 +1,19 @@
+.crumbs {
+    display: flex;
+    margin: 72px 0;
+}
+.btnHome {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    border-style: none;
+    background-color: unset;
+    cursor: pointer;
+    color: unset;
+}
+.btnHome:hover {
+    color: #ff5c00;
+}
