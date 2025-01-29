@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const filterMovies = createAsyncThunk(
   "filter/filterMovies",
   async (objectFromFilter, { rejectWithValue }) => {
-    const { genres, countries, order, type }: any = objectFromFilter;
+    const { genre, country, order, type, yearFrom, yearTo, page }: any =
+      objectFromFilter;
     try {
       const response = await fetch(
-        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${countries}&genres=${genres}&order=${order}&type=${type}&ratingFrom=6&ratingTo=10&yearFrom=2002&yearTo=2024&page=2`,
+        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${country}&genres=${genre}&order=${order}&type=${type}&ratingFrom=6&ratingTo=10&yearFrom=${yearFrom}&yearTo=${yearTo}&page=${page}`,
         {
           method: "GET",
           headers: {
@@ -19,12 +20,13 @@ export const filterMovies = createAsyncThunk(
         throw new Error("error");
       }
       const data = await response.json();
-      return data.items;
+      return data;
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
   }
 );
+
 const filterSlice = createSlice({
   name: "filter",
   initialState: {
@@ -32,10 +34,13 @@ const filterSlice = createSlice({
     loading: false,
     error: null as string | null,
     type: "",
-    total: 0,
-    countries: [],
-    genres: [],
+    totalItems: 0,
+    currentPage: 1,
     order: "",
+    countryId: "",
+    genreId: "",
+    yearTo: 2025,
+    yearFrom: 1980,
   },
   reducers: {
     setOrdering: (state, action) => {
@@ -43,6 +48,19 @@ const filterSlice = createSlice({
     },
     setType: (state, action) => {
       state.type = action.payload;
+    },
+    setCountries: (state, action) => {
+      state.countryId = action.payload;
+    },
+    setGenres: (state, action) => {
+      state.genreId = action.payload;
+    },
+    setYear: (state, action) => {
+      state.yearTo = action.payload;
+      state.yearFrom = action.payload;
+    },
+    setPage: (state, action) => {
+      state.currentPage = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -53,8 +71,8 @@ const filterSlice = createSlice({
       })
       .addCase(filterMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.results = action.payload;
-        state.total = action.payload.lenght;
+        state.results = action.payload.items;
+        state.totalItems = action.payload.total;
       })
       .addCase(filterMovies.rejected, (state, action) => {
         state.loading = false;
@@ -62,5 +80,12 @@ const filterSlice = createSlice({
       });
   },
 });
-export const { setOrdering, setType } = filterSlice.actions;
+export const {
+  setOrdering,
+  setType,
+  setCountries,
+  setGenres,
+  setYear,
+  setPage,
+} = filterSlice.actions;
 export default filterSlice.reducer;

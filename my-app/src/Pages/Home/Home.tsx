@@ -35,7 +35,6 @@ const Home = () => {
   };
 
   const totalPage = Math.ceil(totalItems / 20);
-  console.log(currentPage)
   const renderPageNumber = () => {
     const pageNumber = [];
     const maxPageNumber = 10;
