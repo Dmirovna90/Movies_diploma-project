@@ -4,8 +4,8 @@ const Crumbs = () => {
     const navigate = useNavigate();
   return (
     <div className={style.crumbs}>
-      <button className={style.btnHome} onClick={() => navigate("/")}>
-        Вернуться на главную
+      <button className={style.btnHome} onClick={() => navigate(-1)}>
+        Назад
       </button>
     </div>
   );

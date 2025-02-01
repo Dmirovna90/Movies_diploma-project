@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { IMovie } from "../../types/types";
 import style from "./CardMovies.module.scss";
 const CardMovie = ({
@@ -8,6 +8,7 @@ const CardMovie = ({
   coverURL,
   year,
   ratingKinopoisk,
+  nameOriginal
 }: IMovie) => {
   return (
     <>
@@ -21,8 +22,10 @@ const CardMovie = ({
                 <p>{year}</p>
               </div>
             </div>
-          </div>
-          <p className={style.cardText}>{nameRu}</p>
+          </div>{
+            nameRu ? (<p className={style.cardText}>{nameRu}</p>):(<p className={style.cardText}>{nameOriginal}</p>)
+          }
+          
         </NavLink>
       </div>
     </>

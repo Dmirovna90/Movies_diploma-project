@@ -19,8 +19,8 @@ function App() {
         <Route path="/search" element={<SearchResut />}>
           Результаты поиска
         </Route>
-        <Route path="/filter" element={<FilterPage />}>
-          Категория
+        <Route path="/all" element={<FilterPage />}>
+          Библиотека MOVIES
         </Route>
       </Route>
     </Routes>

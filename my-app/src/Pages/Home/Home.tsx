@@ -4,61 +4,80 @@ import { fetchMovies, setPage } from "../../store/moviesSlice";
 import style from "./Home.module.scss";
 import CardMovie from "../../Components/CardMovie/CardMovie";
 import Title from "../../UI-components/Title/Title";
+import { setDecrease, setIncrease } from "../../store/carouselSlice";
+import { setSlider } from "../../store/filterSlice";
+import Button from "../../UI-components/Button/Button";
+import Select from "../../UI-components/SelectForm/Select/Select";
+import Option from "../../UI-components/SelectForm/Option/Option";
 
 const Home = () => {
-  const dispatch = useDispatch<any>();
-  const { movies, loading, error, type, currentPage, totalItems } =
-    useSelector((state) => state.movies);
-  useEffect(() => {
-    dispatch(
-      fetchMovies({
-        type: "TOP_250_TV_SHOWS",
-        page: currentPage,
-      }),
-    );
-  }, [type, currentPage]);
+  // const dispatch = useDispatch<any>();
+  // const {
+  //   movies,
+  //   loading,
+  //   error,
+  //   type,
+  //   currentPage,
+  //   totalItems,
+  // } = useSelector((state) => state.movies);
+  // useEffect(() => {
+  //   dispatch(
+  //     fetchMovies({
+  //       type: "TOP_250_TV_SHOWS",
+  //       page: currentPage,
+  //     })
+  //   );
+  // }, [type, currentPage]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error</div>;
-  }
-  const handlerPageChange = (pageNumber: number) => {
-    dispatch(setPage(pageNumber));
-  };
-  const handlerPrev = () => {
-    if (currentPage > 1) dispatch(setPage(currentPage - 1));
-  };
-  const handlerNext = () => {
-    if (currentPage < totalPage) dispatch(setPage(currentPage + 1));
-  };
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+  // if (error) {
+  //   return <div>Error</div>;
+  // }
+  // const handlerPageChange = (pageNumber: number) => {
+  //   dispatch(setPage(pageNumber));
+  // };
+  // const handlerPrev = () => {
+  //   if (currentPage > 1) dispatch(setPage(currentPage - 1));
+  // };
+  // const handlerNext = () => {
+  //   if (currentPage < totalPage) dispatch(setPage(currentPage + 1));
+  // };
 
-  const totalPage = Math.ceil(totalItems / 20);
-  const renderPageNumber = () => {
-    const pageNumber = [];
-    const maxPageNumber = 10;
-    const startPage = Math.max(currentPage - Math.floor(maxPageNumber / 2), 1);
-    const endPage = Math.min(startPage + maxPageNumber - 1, totalPage);
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumber.push(
-        <button
-          style={{ color: i === currentPage && "#ff5c00" }}
-          className={style.page}
-          key={i}
-          onClick={() => handlerPageChange(i)}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pageNumber;
-  };
+  // const totalPage = Math.ceil(totalItems / 20);
+  // const renderPageNumber = () => {
+  //   const pageNumber = [];
+  //   const maxPageNumber = 10;
+  //   const startPage = Math.max(currentPage - Math.floor(maxPageNumber / 2), 1);
+  //   const endPage = Math.min(startPage + maxPageNumber - 1, totalPage);
+  //   for (let i = startPage; i <= endPage; i++) {
+  //     pageNumber.push(
+  //       <button
+  //         style={{ color: i === currentPage && "#ff5c00" }}
+  //         className={style.page}
+  //         key={i}
+  //         onClick={() => handlerPageChange(i)}
+  //       >
+  //         {i}
+  //       </button>
+  //     );
+  //   }
+  //   return pageNumber;
+  // };
 
   return (
     <div className={style.container}>
       <Title title={"Популярные сериалы >"} />
-      <div className={style.cardsWrap}>
+      <Button type={"button"} isDisabled = {false} click={()=>console.log('click')} children= {'Фильтры'}/>
+      <div >
+        <label>Сортировка:</label>
+        <Select value={''} valueSelect={undefined} childrens={undefined} >
+          <Option key={1} value={"ALL"} childrens={'ALL'} />
+          <Option value={"FILM"} childrens={'Film'} valueO={undefined}/>
+        </Select>
+      </div>
+      {/* <div className={style.cardsWrap}>
         {movies.map((item: any) => {
           return (
             <div key={item.kinopoiskId}>
@@ -99,7 +118,7 @@ const Home = () => {
             <p>Next</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

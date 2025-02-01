@@ -1,17 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IFilterSlice, IObjectFromFilter } from "../types/types";
 export const filterMovies = createAsyncThunk(
   "filter/filterMovies",
   async (objectFromFilter, { rejectWithValue }) => {
-    const { genre, country, order, type, yearFrom, yearTo, page }: any =
+    const { genre, country, order, type, yearFrom, yearTo, page } :any=
       objectFromFilter;
     try {
       const response = await fetch(
-        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${country}&genres=${genre}&order=${order}&type=${type}&ratingFrom=6&ratingTo=10&yearFrom=${yearFrom}&yearTo=${yearTo}&page=${page}`,
+        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${country}&genres=${genre}&order=${order}&type=${type}&ratingFrom=4&ratingTo=10&yearFrom=${yearFrom}&yearTo=${yearTo}&page=${page}`,
         {
           method: "GET",
           headers: {
-            //   "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
-            "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
+              // "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            // "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
+            // 'X-API-KEY': '4fcf068e-6b44-4edf-9d77-2cdda60848e4',
+            'X-API-KEY': '5514a0c8-e19c-4904-ab50-80b6b9444dfe',
             "Content-Type": "application/json",
           },
         }
@@ -29,7 +32,7 @@ export const filterMovies = createAsyncThunk(
 
 const filterSlice = createSlice({
   name: "filter",
-  initialState: {
+  initialState:<IFilterSlice> {
     results: [],
     loading: false,
     error: null as string | null,
@@ -41,6 +44,7 @@ const filterSlice = createSlice({
     genreId: "",
     yearTo: 2025,
     yearFrom: 1980,
+    currentSlider: 1,
   },
   reducers: {
     setOrdering: (state, action) => {
@@ -61,6 +65,9 @@ const filterSlice = createSlice({
     },
     setPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    setSlider: (state, action) => {
+      state.currentSlider = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -87,5 +94,6 @@ export const {
   setGenres,
   setYear,
   setPage,
+  setSlider,
 } = filterSlice.actions;
 export default filterSlice.reducer;

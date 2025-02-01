@@ -5,10 +5,11 @@ import style from "./SearchResut.module.scss";
 import { useEffect } from "react";
 import { searchMovies } from "../../store/seacrhSlice";
 import Crumbs from "../../UI-components/Crumbs/Crumbs";
+import { AppDispatch } from "../../store";
 const SearchResut = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { results, searchQuery, loading, error } = useSelector(
-    (state) => state.search
+    (state:any) => state.search
   );
   useEffect(() => {
     dispatch(

@@ -1,0 +1,19 @@
+.button {
+    height: 41px;
+    width: 135px;
+    background-color: #FF5C00;;
+    color: white;
+    border-radius: 2px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    border-radius: 5px;
+}
+.button:hover {
+    background-color: #FF3D00;
+    cursor: pointer;
+}
+.button:disabled {
+    color: #8D8E97;
+    background-color: #E8E8E8;
+}

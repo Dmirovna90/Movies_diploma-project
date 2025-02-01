@@ -8,8 +8,10 @@ export const getFilters = createAsyncThunk(
         {
           method: "GET",
           headers: {
-            //   "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
-            "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
+              // "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
+            // "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
+            // 'X-API-KEY': '4fcf068e-6b44-4edf-9d77-2cdda60848e4',
+            'X-API-KEY': '5514a0c8-e19c-4904-ab50-80b6b9444dfe',
             "Content-Type": "application/json",
           },
         }

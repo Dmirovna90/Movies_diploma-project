@@ -4,9 +4,10 @@ import style from "./Search.module.scss";
 import { useEffect } from "react";
 import { searchMovies, setSearchQuery } from "../../store/seacrhSlice";
 import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../store";
 const Search = () => {
-  const { searchQuery } = useSelector((state) => state.search);
-  const dispatch = useDispatch();
+  const { searchQuery } = useSelector((state:any) => state.search);
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate()
   useEffect(() => {
     dispatch(

@@ -1,13 +1,13 @@
 .navbar {
   height: 91.7vh;
   width: 100vw;
-  background-color: rgba($color: #000000, $alpha: 0.4);
+  background-color: rgba($color: #000000, $alpha: 0.8);
   display: flex;
   position: absolute;
   top: -100%;
   transition: all 0,5s;
 }
-nav {
+.nav {
   width: 1120px;
   height: 100px;
   background: #fff;
@@ -19,6 +19,9 @@ nav {
   margin: 0 auto;
   border-radius: 5px;
 }
+.nav.active{
+  background-color: #1a1614;
+}
 .navbar.active {
   top: 8.3vh;
 }
@@ -27,7 +30,7 @@ nav {
   font-size: 18px;
   font-weight: 600;
   line-height: 83px;
-  color: #000;
+  color: #fff;
   text-decoration: none;
 }
 .navItem:hover {

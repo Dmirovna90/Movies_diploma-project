@@ -10,11 +10,14 @@
   margin: auto;
 }
 .headerWrap {
-  width: 1120px;
+  width: 1170px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.headerWrap.active{
+  background-color: #ff5c00;
 }
 .logoWrap {
   display: flex;

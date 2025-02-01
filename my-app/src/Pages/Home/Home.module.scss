@@ -82,3 +82,8 @@ cursor: pointer;
     cursor: pointer;
     color: unset;
 }
+.slider{
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+}
