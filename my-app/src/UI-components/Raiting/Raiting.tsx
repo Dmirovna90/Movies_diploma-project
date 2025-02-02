@@ -1,12 +1,17 @@
 import { IMovie } from "../../types/types";
 import style from "./Raiting.module.scss";
 
-const Raiting = ({ ratingKinopoisk, ratingKinopoiskVoteCount, reviewsCount }: IMovie) => {
+const Raiting = ({
+  ratingKinopoisk,
+  ratingKinopoiskVoteCount,
+  reviewsCount,
+}: IMovie) => {
+  const { raitingWrap, rating, ratingVote, reviews } = style;
   return (
-    <div className={style.raitingWrap}>
-      <h2 className={style.ratingKinopoisk}>{ratingKinopoisk}</h2>
-      <p className={style.ratingKinopoiskVoteCount}>{ratingKinopoiskVoteCount} оценки</p>
-      <p className={style.reviewsCount}>{reviewsCount} рецензий</p>
+    <div className={raitingWrap}>
+      <h2 className={rating}>{ratingKinopoisk}</h2>
+      <p className={ratingVote}>{ratingKinopoiskVoteCount} оценки</p>
+      <p className={reviews}>{reviewsCount} рецензий</p>
     </div>
   );
 };

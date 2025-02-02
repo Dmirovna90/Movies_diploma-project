@@ -4,11 +4,11 @@ import style from "./Search.module.scss";
 import { useEffect } from "react";
 import { searchMovies, setSearchQuery } from "../../store/seacrhSlice";
 import { useNavigate } from "react-router-dom";
-import { AppDispatch } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 const Search = () => {
-  const { searchQuery } = useSelector((state:any) => state.search);
+  const { searchQuery } = useSelector((state: RootState) => state.search);
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(
       searchMovies({
@@ -23,15 +23,15 @@ const Search = () => {
         keyword: searchQuery,
       })
     );
-    navigate('/search')
+    navigate("/search");
   };
   const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     dispatch(setSearchQuery(value));
-
   };
+  const { searchWrap } = style;
   return (
-    <form onSubmit={handlerSubmit} className={style.searchWrap}>
+    <form onSubmit={handlerSubmit} className={searchWrap}>
       <Input
         type={"text"}
         placeholder={"Search..."}

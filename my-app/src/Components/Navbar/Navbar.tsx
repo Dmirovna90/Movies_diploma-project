@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import style from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { navActive } from "../../store/activeSlice";
-import { AppDispatch } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { isClose } = useSelector((state:any) => state.active);
+  const { isClose } = useSelector((state:RootState) => state.active);
   const { active, navbar, navItem, nav } = style;
   const closeNavbar = () => dispatch(navActive());
   return (

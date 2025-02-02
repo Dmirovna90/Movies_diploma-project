@@ -3,16 +3,17 @@ import BurgerMenu from "../../UI-components/BurgerMenu/BurgerMenu";
 import Logo from "../../UI-components/Logo/Logo";
 import Search from "../Search/Search";
 const Header = () => {
+  const { header, container, headerWrap, logoBtnWrap, wrap } = style;
   return (
-    <header className={style.header}>
-      <div className={style.container}>
-        <div className={style.headerWrap}>
-          <div className = {style.logoBtnWrap}>
+    <header className={header}>
+      <div className={container}>
+        <div className={headerWrap}>
+          <div className={logoBtnWrap}>
             <BurgerMenu />
-          <Logo logo = {'MOVIES'}/>
+            <Logo logo={"MOVIES"} />
           </div>
-          <div className= {style.wrap}>
-                     <Search/> 
+          <div className={wrap}>
+            <Search />
           </div>
         </div>
       </div>

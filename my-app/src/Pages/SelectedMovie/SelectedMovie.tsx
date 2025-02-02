@@ -7,10 +7,11 @@ import Crumbs from "../../UI-components/Crumbs/Crumbs";
 import TitleSelectedMovie from "../../UI-components/TitleSelectedMovie/TitleSelectedMovie";
 import PointSelectedMovie from "../../UI-components/PointSelectedMovie/PointSelectedMovie";
 import Raiting from "../../UI-components/Raiting/Raiting";
-import { AppDispatch } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 const SelectedMovie = () => {
+  const { container, wrap, posterWrap, poster } = style;
   const { movieInfo, loading, error } = useSelector(
-    (state: any) => state.movie
+    (state: RootState) => state.movie
   );
   const { kinopoiskId } = useParams();
   const dispatch = useDispatch<AppDispatch>();
@@ -23,13 +24,12 @@ const SelectedMovie = () => {
   if (error) {
     return <div>Error</div>;
   }
-
   return (
-    <div className={style.container} key={movieInfo.kinopoiskId}>
+    <div className={container} key={movieInfo.kinopoiskId}>
       <Crumbs />
-      <div className={style.wrap}>
-        <div className={style.posterWrap}>
-          <img className={style.poster} src={movieInfo.posterUrl}></img>
+      <div className={wrap}>
+        <div className={posterWrap}>
+          <img className={poster} src={movieInfo.posterUrl}></img>
         </div>
         <div className={style.movieInfoWrap}>
           <TitleSelectedMovie

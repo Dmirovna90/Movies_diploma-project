@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IOrdering } from "../../../types/types";
-import { AppDispatch } from "../../../store";
+import { AppDispatch, RootState } from "../../../store";
 import { setCountries } from "../../../store/filterSlice";
 import Select from "../../../UI-components/SelectForm/Select/Select";
 import Option from "../../../UI-components/SelectForm/Option/Option";
 const ByCountries = ({}: IOrdering) => {
-  const { countryId } = useSelector((state: any) => state.filter);
-  const { countries } = useSelector((state: any) => state.filterCountriesGenres);
+  const { countryId } = useSelector((state: RootState) => state.filter);
+  const { countries } = useSelector(
+    (state: RootState) => state.filterCountriesGenres
+  );
   const dispatch = useDispatch<AppDispatch>();
   const handlerCountries = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setCountries(e.target.value));

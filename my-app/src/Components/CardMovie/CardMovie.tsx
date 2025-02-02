@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { IMovie } from "../../types/types";
 import style from "./CardMovies.module.scss";
 const CardMovie = ({
@@ -8,24 +8,27 @@ const CardMovie = ({
   coverURL,
   year,
   ratingKinopoisk,
-  nameOriginal
+  nameOriginal,
 }: IMovie) => {
+  const { cardWrap, link, imgWrap, img, coverCard, infoWrap, cardText } = style;
   return (
     <>
-      <div className={style.cardWrap}>
-        <NavLink to={`/${kinopoiskId}`} className={style.link}>
-          <div className={style.imgWrap}>
-            <img alt={coverURL} src={posterUrl} className={style.img} />
-            <div className={style.coverCard}>
-              <div className={style.infoWrap}>
+      <div className={cardWrap}>
+        <NavLink to={`/${kinopoiskId}`} className={link}>
+          <div className={imgWrap}>
+            <img alt={coverURL} src={posterUrl} className={img} />
+            <div className={coverCard}>
+              <div className={infoWrap}>
                 <h3>Рейтинг: {ratingKinopoisk}</h3>
                 <p>{year}</p>
               </div>
             </div>
-          </div>{
-            nameRu ? (<p className={style.cardText}>{nameRu}</p>):(<p className={style.cardText}>{nameOriginal}</p>)
-          }
-          
+          </div>
+          {nameRu ? (
+            <p className={cardText}>{nameRu}</p>
+          ) : (
+            <p className={cardText}>{nameOriginal}</p>
+          )}
         </NavLink>
       </div>
     </>

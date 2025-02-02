@@ -6,12 +6,13 @@ import { useEffect } from "react";
 import { filterMovies, setPage } from "../../store/filterSlice";
 import { getFilters } from "../../store/filterCountriesGenresSlice";
 import Pagination from "../../Components/Pagination/Pagination";
-import { AppDispatch } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 import FiltersBody from "../../Components/Filters/FiitersBody/FiltersBody";
 import ByGenres from "../../Components/Filters/FiltersOptions/ByGenres";
 import ByCountries from "../../Components/Filters/FiltersOptions/ByCountries";
 import ByYears from "../../Components/Filters/FiltersOptions/ByYears";
 const Series = () => {
+  const { container, cardsWrap } = style;
   const dispatch = useDispatch<AppDispatch>();
   const {
     results,
@@ -24,7 +25,7 @@ const Series = () => {
     yearFrom,
     totalItems,
     currentPage,
-  } = useSelector((state: any) => state.filter);
+  } = useSelector((state: RootState) => state.filter);
   useEffect(() => {
     dispatch(
       filterMovies({
@@ -47,14 +48,14 @@ const Series = () => {
     return <div>Error</div>;
   }
   return (
-    <div className={style.container}>
+    <div className={container}>
       <Title title={"Сериалы"} />
       <FiltersBody>
         <ByGenres />
         <ByCountries />
         <ByYears />
       </FiltersBody>
-      <div className={style.cardsWrap}>
+      <div className={cardsWrap}>
         {results.map((item: any) => {
           return (
             <div key={item.kinopoiskId}>

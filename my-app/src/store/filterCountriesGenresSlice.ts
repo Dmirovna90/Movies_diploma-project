@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IFilter } from "../types/types";
 export const getFilters = createAsyncThunk(
   "filterCountriesGenres/getFilters",
   async (_, { rejectWithValue }) => {
@@ -8,10 +9,7 @@ export const getFilters = createAsyncThunk(
         {
           method: "GET",
           headers: {
-              // "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
-            // "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
-            // 'X-API-KEY': '4fcf068e-6b44-4edf-9d77-2cdda60848e4',
-            'X-API-KEY': '5514a0c8-e19c-4904-ab50-80b6b9444dfe',
+            "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
             "Content-Type": "application/json",
           },
         }
@@ -27,16 +25,22 @@ export const getFilters = createAsyncThunk(
   }
 );
 
+const initialState: IFilter= {
+  loading: false,
+  error: null as string | null,
+  countries: [],
+  genres: [],
+}
 const filterCountriesGenresSlice = createSlice({
   name: "filterCountriesGenres",
-  initialState: {
-    loading: false,
-    error: null as string | null,
-    countries: [],
-    genres: [],
-  },
-  reducers: {
-  },
+  initialState,
+  // initialState: {
+  //   loading: false,
+  //   error: null as string | null,
+  //   countries: [],
+  //   genres: [],
+  // },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getFilters.pending, (state) => {

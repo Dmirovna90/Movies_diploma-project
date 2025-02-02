@@ -12,8 +12,8 @@ export interface ITitle {
 export interface IMovie {
   nameRu?: string;
   nameOriginal?: string | null;
-  countries?: [];
-  genres?: [];
+  countries?: { country: string }[];
+  genres?: { genre: string }[];
   year?: number;
   type?: string;
   kinopoiskId?: number;
@@ -27,6 +27,46 @@ export interface IMovie {
   genre?: string;
   description?: string;
   slogan?: string;
+  serial?: boolean;
+}
+export interface ISearch {
+  results: IMovie[];
+  loading: boolean;
+  error: null | string;
+  type: string;
+  total: number;
+  searchQuery: string;
+}
+export interface IObjectFromSearch {
+  keyword: string;
+}
+export interface IObjectFromFilter {
+  genre: number | string;
+  country: number | string;
+  order: string;
+  type: string;
+  yearFrom: number;
+  yearTo: number;
+  page: number;
+}
+export interface IFilterSlice {
+  results: IMovie[];
+  loading: boolean;
+  error: null | string;
+  type: string;
+  totalItems: number;
+  currentPage: number;
+  order: string;
+  countryId: string;
+  genreId: string;
+  yearTo: number;
+  yearFrom: number;
+  currentSlider: number;
+}
+export interface IMovieSlice {
+  movieInfo: IMovie;
+  loading: boolean;
+  error: string | null;
 }
 export interface IInput {
   placeholder?: string;
@@ -50,35 +90,18 @@ export interface IOrdering {
 }
 export interface IPoint {
   topic: string | null;
-  point?: string | number;
+  point: string | number | any[];
 }
 export interface IStore {
   currentPage: number;
   totalItems: number;
   setPage: (() => void) | any;
 }
-export interface IObjectFromFilter {
-  genre: string;
-  country: string;
-  order: string;
-  type: string;
-  yearFrom: number;
-  yearTo: number;
-  page: number;
-}
-export interface IFilterSlice {
-  results?: [];
-  loading?: boolean;
-  error?: string | null;
-  type?: string;
-  totalItems?: number;
-  currentPage?: number;
-  order?: string;
-  countryId?: string | number;
-  genreId?: string | number;
-  yearTo?: number;
-  yearFrom?: number;
-  currentSlider?: number;
+export interface IFilter {
+  loading: boolean;
+  error: string | null;
+  countries?: { country: string }[];
+  genres?: { genre: string }[];
 }
 export interface IChildren {
   children?:

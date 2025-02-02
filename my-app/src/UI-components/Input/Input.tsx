@@ -7,9 +7,10 @@ const Input = ({
   value,
   onChange,
 }: IInput) => {
+  const { inputField } = style;
   return (
     <input
-      className={style.inputField}
+      className={inputField}
       type={type}
       placeholder={placeholder}
       name={name}

@@ -1,14 +1,10 @@
 import style from "./Button.module.scss";
 import { IButton } from "../../types/types";
-const Button = ({
-  children,
-  isDisabled,
-  click,
-  type,
-}: IButton) => {
+const Button = ({ children, isDisabled, click, type }: IButton) => {
+  const { button } = style;
   return (
     <button
-      className={style.button}
+      className={button}
       disabled={isDisabled}
       onClick={click}
       type={type}

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-export const getMovieInfo = createAsyncThunk(
+import { IMovie, IMovieSlice } from "../types/types";
+export const getMovieInfo = createAsyncThunk<{ kinopoiskId: number }>(
   "movie/getMovieInfo",
   async (objectFromMoviePage, { rejectWithValue }) => {
     const { kinopoiskId }: any = objectFromMoviePage;
@@ -9,10 +10,7 @@ export const getMovieInfo = createAsyncThunk(
         {
           method: "GET",
           headers: {
-              // "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
-            // "X-API-KEY": "931765dc-e4c2-4101-9b85-2010f8f61aeb",
-            // 'X-API-KEY': '4fcf068e-6b44-4edf-9d77-2cdda60848e4',
-            'X-API-KEY': '5514a0c8-e19c-4904-ab50-80b6b9444dfe',
+            "X-API-KEY": "001f728f-d136-4421-b634-bd64dfd6b5b6",
             "Content-Type": "application/json",
           },
         }
@@ -25,30 +23,33 @@ export const getMovieInfo = createAsyncThunk(
     }
   }
 );
+
+const initialState: IMovieSlice = {
+  movieInfo: {
+    kinopoiskId: 0,
+    nameRu: "",
+    nameOriginal: "",
+    posterUrl: "",
+    reviewsCount: 0,
+    ratingKinopoisk: 0,
+    ratingKinopoiskVoteCount: 0,
+    year: 0,
+    filmLength: 0,
+    slogan: "",
+    description: "",
+    countries: [],
+    genres: [],
+    country: "",
+    genre: "",
+    serial: false,
+  },
+  loading: false,
+  error: null as string | null,
+};
+
 const selectedMovieSlice = createSlice({
   name: "movie",
-  initialState: {
-    movieInfo: {
-      kinopoiskId: 0,
-      nameRu: "",
-      nameOriginal: "",
-      posterUrl: "",
-      reviewsCount: 0,
-      ratingKinopoisk: 0,
-      ratingKinopoiskVoteCount: 0,
-      year: 0,
-      filmLength: 0,
-      slogan: "",
-      description: "",
-      countries: [],
-      genres: [],
-      country: "",
-      genre: "",
-      serial: false,
-    },
-    loading: false,
-    error: null as string | null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

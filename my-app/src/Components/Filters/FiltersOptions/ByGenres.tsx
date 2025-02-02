@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IOrdering } from "../../../types/types";
-import { AppDispatch } from "../../../store";
+import { AppDispatch, RootState } from "../../../store";
 import { setGenres } from "../../../store/filterSlice";
 import Select from "../../../UI-components/SelectForm/Select/Select";
 import Option from "../../../UI-components/SelectForm/Option/Option";
 const ByGenres = ({}: IOrdering) => {
-  const { genreId } = useSelector((state: any) => state.filter);
-  const { genres } = useSelector((state: any) => state.filterCountriesGenres);
+  const { genreId } = useSelector((state: RootState) => state.filter);
+  const { genres } = useSelector(
+    (state: RootState) => state.filterCountriesGenres
+  );
   const dispatch = useDispatch<AppDispatch>();
   const handlerGenres = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setGenres(e.target.value));

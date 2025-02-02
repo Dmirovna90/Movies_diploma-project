@@ -1,8 +1,9 @@
 import { IOrdering } from "../../../types/types";
-import style from './Select.module.scss'
+import style from "./Select.module.scss";
 const Select = ({ value, onChange, children }: IOrdering) => {
+  const { select } = style;
   return (
-    <select value={value} onChange={onChange} className = {style.select}>
+    <select value={value} onChange={onChange} className={select}>
       {children}
     </select>
   );
