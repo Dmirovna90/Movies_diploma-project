@@ -1,0 +1,27 @@
+.filtersHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+    padding: 0 10px;
+}
+.filter{
+    display: none;
+    margin-bottom: 50px;
+    height: 80px;
+}
+.filter.active{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba($color: #493c3c, $alpha: 0.5);
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px;
+}
+.down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

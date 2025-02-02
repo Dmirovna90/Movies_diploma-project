@@ -9,7 +9,9 @@ import PointSelectedMovie from "../../UI-components/PointSelectedMovie/PointSele
 import Raiting from "../../UI-components/Raiting/Raiting";
 import { AppDispatch } from "../../store";
 const SelectedMovie = () => {
-  const { movieInfo, loading, error } = useSelector((state:any) => state.movie);
+  const { movieInfo, loading, error } = useSelector(
+    (state: any) => state.movie
+  );
   const { kinopoiskId } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -60,14 +62,20 @@ const SelectedMovie = () => {
               />
             </>
           ) : (
-            <PointSelectedMovie topic={"Время"} point={`${movieInfo.filmLength} минут`} />
+            <PointSelectedMovie
+              topic={"Время"}
+              point={`${movieInfo.filmLength} минут`}
+            />
           )}
-          {movieInfo.slogan&&<PointSelectedMovie topic={"Слоган"} point={movieInfo.slogan} />}
+          {movieInfo.slogan && (
+            <PointSelectedMovie topic={"Слоган"} point={movieInfo.slogan} />
+          )}
         </div>
         <Raiting
-            reviewsCount={movieInfo.reviewsCount}
-            ratingKinopoisk={movieInfo.ratingKinopoisk}
-            ratingKinopoiskVoteCount={movieInfo.ratingKinopoiskVoteCount}        />
+          reviewsCount={movieInfo.reviewsCount}
+          ratingKinopoisk={movieInfo.ratingKinopoisk}
+          ratingKinopoiskVoteCount={movieInfo.ratingKinopoiskVoteCount}
+        />
       </div>
     </div>
   );

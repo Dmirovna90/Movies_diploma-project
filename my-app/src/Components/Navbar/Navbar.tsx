@@ -14,16 +14,16 @@ const Navbar = () => {
       onClick={closeNavbar}
     >
       <nav className={!isClose ? nav : `${nav} ${active}`}>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/all">
+        <NavLink onClick={closeNavbar} className={navItem} to="/">
           Библиотека MOVIES
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/All">
           Фильмы
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/series">
           Сериалы
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/cartoons">
           Мультфильмы
         </NavLink>
       </nav>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IFilterSlice, IObjectFromFilter } from "../types/types";
+import { IFilterSlice } from "../types/types";
 export const filterMovies = createAsyncThunk(
   "filter/filterMovies",
   async (objectFromFilter, { rejectWithValue }) => {
@@ -7,7 +7,7 @@ export const filterMovies = createAsyncThunk(
       objectFromFilter;
     try {
       const response = await fetch(
-        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${country}&genres=${genre}&order=${order}&type=${type}&ratingFrom=4&ratingTo=10&yearFrom=${yearFrom}&yearTo=${yearTo}&page=${page}`,
+        `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=${country}&genres=${genre}&order=${order}&type=${type}&ratingFrom=4&ratingTo=9.2&yearFrom=${yearFrom}&yearTo=${yearTo}&page=${page}`,
         {
           method: "GET",
           headers: {

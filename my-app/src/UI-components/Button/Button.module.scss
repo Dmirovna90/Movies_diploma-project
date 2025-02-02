@@ -1,19 +1,20 @@
 .button {
-    height: 41px;
-    width: 135px;
-    background-color: #FF5C00;;
-    color: white;
-    border-radius: 2px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 21px;
-    border-radius: 5px;
+  height: 40px;
+  width: 150px;
+  background-color: #ff5c00;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21px;
+  margin-right: 50px;
+
 }
 .button:hover {
-    background-color: #FF3D00;
-    cursor: pointer;
+  background-color: #ff3d00;
+  cursor: pointer;
 }
 .button:disabled {
-    color: #8D8E97;
-    background-color: #E8E8E8;
+  color: #8d8e97;
+  background-color: #e8e8e8;
 }

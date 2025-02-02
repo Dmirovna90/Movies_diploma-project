@@ -1,9 +1,17 @@
 .select {
-    width: 200px;
+    width: 250px;
     height: 40px;
-    background-color: rgba($color: #493c3c, $alpha: 0.5);
+    background-color: #FF5C00;
     border-radius: 10px;
     color: #fff;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    margin-right: 50px;
 }
+.select:hover {
+    background-color: #ff3d00;
+    cursor: pointer;
+  }

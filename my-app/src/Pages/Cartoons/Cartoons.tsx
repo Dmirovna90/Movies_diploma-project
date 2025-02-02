@@ -1,23 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import CardMovie from "../../Components/CardMovie/CardMovie";
 import Title from "../../UI-components/Title/Title";
-import style from "./Home.module.scss";
+import style from "../AllMovies/AllMovies.module.scss";
 import { useEffect } from "react";
 import { filterMovies, setPage } from "../../store/filterSlice";
 import { getFilters } from "../../store/filterCountriesGenresSlice";
 import Pagination from "../../Components/Pagination/Pagination";
 import { AppDispatch } from "../../store";
 import FiltersBody from "../../Components/Filters/FiitersBody/FiltersBody";
-import ByGenres from "../../Components/Filters/FiltersOptions/ByGenres";
 import ByCountries from "../../Components/Filters/FiltersOptions/ByCountries";
 import ByYears from "../../Components/Filters/FiltersOptions/ByYears";
-const Home = () => {
+const Cartoons = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {
     results,
-    type,
     countryId,
-    genreId,
     order,
     loading,
     error,
@@ -39,7 +36,9 @@ const Home = () => {
       })
     );
     dispatch(getFilters());
-  }, [order, countryId, genreId, yearTo, yearFrom, currentPage]);
+  }, [order, countryId, yearTo, yearFrom, currentPage]);
+  const type = "ALL";
+  const genreId = 18;
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -48,9 +47,8 @@ const Home = () => {
   }
   return (
     <div className={style.container}>
-      <Title title={"Библиотека MOVIES"} />
+      <Title title={"Мультфильмы"} />
       <FiltersBody>
-        <ByGenres />
         <ByCountries />
         <ByYears />
       </FiltersBody>
@@ -78,4 +76,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default Cartoons;

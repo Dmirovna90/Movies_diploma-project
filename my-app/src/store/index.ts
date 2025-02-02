@@ -5,7 +5,6 @@ import searchSlice from "./seacrhSlice";
 import filterSlice from "./filterSlice";
 import filterCountriesGenresSlice from "./filterCountriesGenresSlice";
 import activeSlice from "./activeSlice";
-import carouselSlice from "./carouselSlice";
 
 const indexStore = configureStore({
   reducer: {
@@ -15,7 +14,6 @@ const indexStore = configureStore({
     filter: filterSlice,
     filterCountriesGenres: filterCountriesGenresSlice,
     active: activeSlice,
-    carousel: carouselSlice,
   },
 });
 export type AppDispatch = typeof indexStore.dispatch;

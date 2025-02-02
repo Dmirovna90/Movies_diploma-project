@@ -1,3 +1,10 @@
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+} from "react";
+
 export interface ITitle {
   logo?: string;
   title?: string;
@@ -35,8 +42,7 @@ export interface IButton {
   type?: "submit" | "reset" | "button" | undefined;
 }
 export interface IOrdering {
-  valueSelect?: string | number | undefined;
-  value?: string;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   key?: number | string;
   children?: any;
@@ -73,4 +79,15 @@ export interface IFilterSlice {
   yearTo?: number;
   yearFrom?: number;
   currentSlider?: number;
+}
+export interface IChildren {
+  children?:
+    | string
+    | number
+    | boolean
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | Iterable<ReactNode>
+    | ReactPortal
+    | null
+    | undefined;
 }

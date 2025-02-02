@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import CardMovie from "../../Components/CardMovie/CardMovie";
 import Title from "../../UI-components/Title/Title";
-import style from "./Home.module.scss";
+import style from "./AllMovies.module.scss";
 import { useEffect } from "react";
 import { filterMovies, setPage } from "../../store/filterSlice";
 import { getFilters } from "../../store/filterCountriesGenresSlice";
@@ -11,11 +11,10 @@ import FiltersBody from "../../Components/Filters/FiitersBody/FiltersBody";
 import ByGenres from "../../Components/Filters/FiltersOptions/ByGenres";
 import ByCountries from "../../Components/Filters/FiltersOptions/ByCountries";
 import ByYears from "../../Components/Filters/FiltersOptions/ByYears";
-const Home = () => {
+const AllMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {
     results,
-    type,
     countryId,
     genreId,
     order,
@@ -40,6 +39,7 @@ const Home = () => {
     );
     dispatch(getFilters());
   }, [order, countryId, genreId, yearTo, yearFrom, currentPage]);
+  const type = "FILM";
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -48,7 +48,7 @@ const Home = () => {
   }
   return (
     <div className={style.container}>
-      <Title title={"Библиотека MOVIES"} />
+      <Title title={"Фильмы"} />
       <FiltersBody>
         <ByGenres />
         <ByCountries />
@@ -78,4 +78,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default AllMovies;
