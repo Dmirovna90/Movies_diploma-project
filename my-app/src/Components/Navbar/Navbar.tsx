@@ -1,24 +1,29 @@
 import { NavLink } from "react-router-dom";
 import style from "./Navbar.module.scss";
-import { useContext } from "react";
-import { ActiveContext } from "../../context/Context";
+import { useDispatch, useSelector } from "react-redux";
+import { navActive } from "../../store/activeSlice";
+import { AppDispatch, RootState } from "../../store";
 const Navbar = () => {
-  const context = useContext(ActiveContext);
-  const { active, navbar, navItem } = style;
-  const closeNavbar = () => context?.SetIsActive(!context.isActive);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isClose } = useSelector((state:RootState) => state.active);
+  const { active, navbar, navItem, nav } = style;
+  const closeNavbar = () => dispatch(navActive());
   return (
-    <div className={!context?.isActive ? navbar : `${navbar} ${active}`} onClick={closeNavbar}>
-      <nav>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
-          Главная
+    <div
+      className={!isClose ? navbar : `${navbar} ${active}`}
+      onClick={closeNavbar}
+    >
+      <nav className={!isClose ? nav : `${nav} ${active}`}>
+        <NavLink onClick={closeNavbar} className={navItem} to="/">
+          Библиотека MOVIES
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/All">
           Фильмы
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/series">
           Сериалы
         </NavLink>
-        <NavLink onClick={closeNavbar} className={style.navItem} to="/">
+        <NavLink onClick={closeNavbar} className={navItem} to="/cartoons">
           Мультфильмы
         </NavLink>
       </nav>

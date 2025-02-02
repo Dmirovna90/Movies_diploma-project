@@ -1,0 +1,13 @@
+.container {
+    max-width: 1120px;
+    padding: 0 15px;
+    margin: auto;
+}
+.cardsWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 1120px;
+}
+

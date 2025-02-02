@@ -1,0 +1,19 @@
+.searchWrap {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
+.seacrh {
+    width: 84px;
+    height: 8.3vh;
+}
+.input {
+    height: 56px;
+    border-radius: 2px;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 0 14px;
+    font-weight: 400;
+    color: fff;
+    border: 1px solid #8D8E97;
+}

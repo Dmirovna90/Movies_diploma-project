@@ -1,0 +1,27 @@
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.title {
+  font-size: 36px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 42px;
+  text-align: left;
+}
+.titleOriginal {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff66;
+  line-height: 19px;
+  text-align: left;
+}
+.descriptionMovie {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 19px;
+  text-align: left;
+}

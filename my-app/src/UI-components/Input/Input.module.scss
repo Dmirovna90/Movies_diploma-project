@@ -1,0 +1,19 @@
+.inputField {
+    height: 40px;
+    width: 500px;
+    background-color: rgba($color: #493c3c, $alpha: 0.5);
+    font-size: 16px;
+    line-height: 20px;
+    padding: 0 14px;
+    font-weight: 400;
+    color: #fff;
+}
+.inputField:focus {
+    cursor: text;
+}
+.inputField::placeholder {
+    color: #8D8E97;
+}
+.inputField:focus::placeholder {
+    opacity: 0;
+}

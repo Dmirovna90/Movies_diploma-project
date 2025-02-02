@@ -13,14 +13,15 @@
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 10px;
+  position: relative;
 }
 .img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
 }
 .cardText {
   font-size: 16px;
@@ -31,4 +32,25 @@
 }
 .cardText:hover {
   color: #ff5c00;
+}
+.coverCard {
+  width: 200px;
+  height: 285px;
+  position: absolute;
+  opacity: 0;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  top: 0;
+  left: 0;
+  color: #ff5c00;
+}
+.coverCard:hover {
+  opacity: 1;
+}
+.infoWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 200px;
+  height: 285px;
 }

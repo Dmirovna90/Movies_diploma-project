@@ -1,109 +1,81 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchMovies, setPage, setType } from "../../store/moviesSlise";
-import style from "./Home.module.scss";
 import CardMovie from "../../Components/CardMovie/CardMovie";
 import Title from "../../UI-components/Title/Title";
-
+import style from "./Home.module.scss";
+import { useEffect } from "react";
+import { filterMovies, setPage } from "../../store/filterSlice";
+import { getFilters } from "../../store/filterCountriesGenresSlice";
+import Pagination from "../../Components/Pagination/Pagination";
+import { AppDispatch, RootState } from "../../store";
+import FiltersBody from "../../Components/Filters/FiitersBody/FiltersBody";
+import ByGenres from "../../Components/Filters/FiltersOptions/ByGenres";
+import ByCountries from "../../Components/Filters/FiltersOptions/ByCountries";
+import ByYears from "../../Components/Filters/FiltersOptions/ByYears";
 const Home = () => {
-  const dispatch = useDispatch<any>();
+  const { container, cardsWrap } = style;
+  const dispatch = useDispatch<AppDispatch>();
   const {
-    movies,
+    results,
+    type,
+    countryId,
+    genreId,
+    order,
     loading,
     error,
-    type,
-    currentPage,
-    itemsPerPage,
+    yearTo,
+    yearFrom,
     totalItems,
-    searchQuery,
-    ordering,
-  } = useSelector((state) => state.movies);
+    currentPage,
+  } = useSelector((state: RootState) => state.filter);
   useEffect(() => {
     dispatch(
-      fetchMovies({
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
-        searchQuery: searchQuery,
-        ordering: ordering,
-        type: 'TOP_250_TV_SHOWS',
+      filterMovies({
+        country: countryId,
+        order: order,
+        type: type,
+        genre: genreId,
+        yearTo: yearTo,
+        yearFrom: yearFrom,
+        page: currentPage,
       })
     );
-  }, [currentPage, ordering, type]);
+    dispatch(getFilters());
+  }, [order, countryId, genreId, yearTo, yearFrom, currentPage]);
   if (loading) {
     return <div>Loading...</div>;
   }
   if (error) {
     return <div>Error</div>;
   }
-  const handlerPageChange = (pageNumber: number) => {
-    dispatch(setPage(pageNumber));
-  };
-  const handlerPrev = () => {
-    if (currentPage > 1) dispatch(setPage(currentPage - 1));
-  };
-  const handlerNext = () => {
-    if (currentPage < totalPage) dispatch(setPage(currentPage + 1));
-  };
-  const totalPage = Math.ceil(totalItems / itemsPerPage);
-  const renderPageNumber = () => {
-    const pageNumber = [];
-    const maxPageNumber = 10;
-    const startPage = Math.max(currentPage - Math.floor(maxPageNumber / 2), 1);
-    const endPage = Math.min(startPage + maxPageNumber - 1, totalPage);
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumber.push(
-        <button
-          style={{ color: i === currentPage && "#fff" }}
-          className={style.page}
-          key={i}
-          onClick={() => handlerPageChange(i)}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pageNumber;
-  };
-
   return (
-    <div className = {style.container}>
-      <Title title = {'Популярные сериалы >'}/>
-      <div className = {style.cardsWrap}>
-        {movies.map((item: any) => {
+    <div className={container}>
+      <Title title={"Библиотека MOVIES"} />
+      <FiltersBody>
+        <ByGenres />
+        <ByCountries />
+        <ByYears />
+      </FiltersBody>
+      <div className={cardsWrap}>
+        {results.map((item: any) => {
           return (
             <div key={item.kinopoiskId}>
-                <CardMovie kinopoiskId = {item.kinopoiskId} posterUrl= {item.posterUrl} nameRu={item.nameRu}/>
+              <CardMovie
+                kinopoiskId={item.kinopoiskId}
+                posterUrl={item.posterUrl}
+                nameRu={item.nameRu}
+                ratingKinopoisk={item.ratingKinopoisk}
+                year={item.year}
+                nameOriginal={item.nameOriginal}
+              />
             </div>
           );
         })}
       </div>
-      <div className={style.prevNextWrap}>
-        <div
-          className={style.prevWrap}
-          onClick={handlerPrev}
-          disabled={currentPage === 1}
-        >
-          <div className={style.arrowPrev}>
-            <p>Prev</p>
-          </div>
-          <div className={style.prevDescription}>
-            <span className={style.prev}>Prev</span>
-          </div>
-        </div>
-        <div className={style.pageNumbers}>{renderPageNumber()}</div>
-        <div
-          className={style.prevWrap}
-          onClick={handlerNext}
-          disabled={currentPage === totalPage}
-        >
-          <div className={style.nextDescription}>
-            <span className={style.next}>Next</span>
-          </div>
-          <div className={style.arrowNext}>
-          <p>Next</p>
-          </div>
-        </div>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalItems={totalItems}
+        setPage={(pageNumber: number) => dispatch(setPage(pageNumber))}
+      />
     </div>
   );
 };

@@ -1,0 +1,29 @@
+.raitingWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+    height: 200px;
+  }
+  .rating {
+    font-size: 36px;
+    font-weight: 900;
+    color: #44C916;
+    line-height: 36px;
+    text-align: left;
+  }
+  .ratingVote {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff66;
+    line-height: 19px;
+    text-align: left;
+  }
+  .reviews {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 19px;
+    text-align: left;
+  }
+  

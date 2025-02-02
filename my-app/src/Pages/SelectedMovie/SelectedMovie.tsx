@@ -1,14 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Title from "../../UI-components/Title/Title";
+import { useParams } from "react-router-dom";
 import style from "./SelectedMovie.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { getMovieInfo } from "../../store/selectedMovieSlice";
+import Crumbs from "../../UI-components/Crumbs/Crumbs";
+import TitleSelectedMovie from "../../UI-components/TitleSelectedMovie/TitleSelectedMovie";
+import PointSelectedMovie from "../../UI-components/PointSelectedMovie/PointSelectedMovie";
+import Raiting from "../../UI-components/Raiting/Raiting";
+import { AppDispatch, RootState } from "../../store";
 const SelectedMovie = () => {
-  const navigate = useNavigate();
-  const { movieInfo, loading, error } = useSelector((state) => state.movie);
+  const { container, wrap, posterWrap, poster } = style;
+  const { movieInfo, loading, error } = useSelector(
+    (state: RootState) => state.movie
+  );
   const { kinopoiskId } = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(getMovieInfo({ kinopoiskId }));
   }, [kinopoiskId]);
@@ -18,56 +24,58 @@ const SelectedMovie = () => {
   if (error) {
     return <div>Error</div>;
   }
-
   return (
-    <div className={style.container} key={movieInfo.kinopoiskId}>
-      <div className={style.crumbs}>
-        <button className={style.btnHome} onClick={() => navigate("/")}>
-          Главная
-        </button>
-        <button className={style.btnPost} onClick={() => navigate("")}>
-          {movieInfo.nameRu}
-        </button>
-      </div>
-      <div className = {style.wrap}>
-        <div className={style.posterWrap}>
-          <img className={style.poster} src={movieInfo.posterUrl}></img>
+    <div className={container} key={movieInfo.kinopoiskId}>
+      <Crumbs />
+      <div className={wrap}>
+        <div className={posterWrap}>
+          <img className={poster} src={movieInfo.posterUrl}></img>
         </div>
         <div className={style.movieInfoWrap}>
-          <Title title={movieInfo.nameRu} />
-          <p>{movieInfo.nameOriginal}</p>
-          <p>{movieInfo.description}</p>
-          <p>
-            Год производства: <span>{movieInfo.year}</span>
-          </p>
-          <p className={style.country}>
-            Страна:
-            {movieInfo.countries.map((item: any) => {
-              return <span key={item.country}> {item.country}</span>;
+          <TitleSelectedMovie
+            description={movieInfo.description}
+            nameRu={movieInfo.nameRu}
+            nameOriginal={movieInfo.nameOriginal}
+          />
+          <PointSelectedMovie
+            topic={"Год производства"}
+            point={movieInfo.year}
+          />
+          <PointSelectedMovie
+            topic={"Страна"}
+            point={movieInfo.countries.map((item: any) => {
+              return <span key={item.country}> {item.country}, </span>;
             })}
-          </p>
-          <p>
-            Жанр:
-            {movieInfo.genres.map((item: any) => {
-              return <span key={item.genre}> {item.genre} /</span>;
+          ></PointSelectedMovie>
+          <PointSelectedMovie
+            topic={"Жанр"}
+            point={movieInfo.genres.map((item: any) => {
+              return <span key={item.genre}> {item.genre}, </span>;
             })}
-          </p>
-          <p>
-            Слоган: <span>"{movieInfo.slogan}"</span>
-          </p>
-          <p>
-            Время: <span>{movieInfo.filmLength} минут</span>
-          </p>
+          ></PointSelectedMovie>
+          {movieInfo.serial ? (
+            <>
+              <PointSelectedMovie topic={"Сериал"} point={"Да"} />
+              <PointSelectedMovie
+                topic={"Продолжительность серии"}
+                point={`${movieInfo.filmLength} минут`}
+              />
+            </>
+          ) : (
+            <PointSelectedMovie
+              topic={"Время"}
+              point={`${movieInfo.filmLength} минут`}
+            />
+          )}
+          {movieInfo.slogan && (
+            <PointSelectedMovie topic={"Слоган"} point={movieInfo.slogan} />
+          )}
         </div>
-        <div className={style.ratingWrap}>
-          <p>{movieInfo.ratingKinopoisk}</p>
-          <p>
-            {movieInfo.ratingKinopoiskVoteCount} <span>оценки</span>
-          </p>
-          <p>
-            {movieInfo.reviewsCount} <span>рецензий</span>
-          </p>
-        </div>
+        <Raiting
+          reviewsCount={movieInfo.reviewsCount}
+          ratingKinopoisk={movieInfo.ratingKinopoisk}
+          ratingKinopoiskVoteCount={movieInfo.ratingKinopoiskVoteCount}
+        />
       </div>
     </div>
   );

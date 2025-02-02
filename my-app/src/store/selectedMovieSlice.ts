@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-export const getMovieInfo = createAsyncThunk(
+import { IMovie, IMovieSlice } from "../types/types";
+export const getMovieInfo = createAsyncThunk<{ kinopoiskId: number }>(
   "movie/getMovieInfo",
   async (objectFromMoviePage, { rejectWithValue }) => {
     const { kinopoiskId }: any = objectFromMoviePage;
@@ -22,29 +23,33 @@ export const getMovieInfo = createAsyncThunk(
     }
   }
 );
+
+const initialState: IMovieSlice = {
+  movieInfo: {
+    kinopoiskId: 0,
+    nameRu: "",
+    nameOriginal: "",
+    posterUrl: "",
+    reviewsCount: 0,
+    ratingKinopoisk: 0,
+    ratingKinopoiskVoteCount: 0,
+    year: 0,
+    filmLength: 0,
+    slogan: "",
+    description: "",
+    countries: [],
+    genres: [],
+    country: "",
+    genre: "",
+    serial: false,
+  },
+  loading: false,
+  error: null as string | null,
+};
+
 const selectedMovieSlice = createSlice({
   name: "movie",
-  initialState: {
-    movieInfo: {
-      kinopoiskId: 0,
-      nameRu: "",
-      nameOriginal: "",
-      posterUrl: "",
-      reviewsCount: 0,
-      ratingKinopoisk: 0,
-      ratingKinopoiskVoteCount: 0,
-      year: 0,
-      filmLength: 0,
-      slogan: "",
-      description: "",
-      countries: [],
-      genres: [],
-      country: '',
-      genre: '',
-    },
-    loading: false,
-    error: null as string | null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
